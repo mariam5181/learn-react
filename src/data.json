@@ -1,0 +1,5 @@
+[
+	{ "id":1, "first_name":"John", "last_name":"Doe", "age":30, "gender":"M" },
+	{ "id":2, "first_name":"Sarah", "last_name":"Smith", "age":25, "gender":"F" },
+	{ "id":3, "first_name":"Sam", "last_name":"Jones", "age":40, "gender":"M" }
+]
