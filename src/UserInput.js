@@ -3,22 +3,25 @@ import React from 'react';
 class UserInput extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: []};
+        this.state = {value: ''};
     }
 
     handleKeyPress = (event) => {
         if(event.key === 'Enter'){
-            let newValue = this.state.value.concat(event.target.value);
-            this.setState({ value: newValue });
+            if(!this.state.value) return;
 
-            this.props.onSubmit(newValue);
+            this.props.onSubmit(this.state.value);
 
-            event.target.value = '';
+            this.setState({ value: '' });
         }
+    };
+
+    onChange = (event) => {
+        this.setState({ value: event.target.value });
     }
 
     render = () => (
-        <input type="text" onKeyPress={this.handleKeyPress} value={this.state.text} />
+        <input type="text" onChange={this.onChange} onKeyPress={this.handleKeyPress} value={this.state.value} />
     );
 }
 

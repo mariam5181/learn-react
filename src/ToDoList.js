@@ -5,17 +5,54 @@ import List from './List';
 class ToDoList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: ''};
+        this.state = {
+            tasks: []
+        };
     }
 
     onSubmit = inputValue => {
-        this.setState({value: inputValue});
-    }
+        this.setState({
+            tasks: [
+                ...this.state.tasks,
+                {
+                    id: Date.now(),
+                    title: inputValue,
+                    done: false,
+                }
+            ]
+        });
+    };
+
+    toggleCheck = (item) => {
+        const tasks = this.state.tasks.map( (i) => {
+            if(i.id === item.id) {
+                return {
+                    ...i,
+                    done: !item.done,
+                };
+            }
+            return i;
+        });
+
+        this.setState({ tasks });
+    };
+
+    removeItem = item => {
+        const tasks = this.state.tasks.filter(currentItem => {
+            if(currentItem.id !== item.id) {
+                return true;
+            }
+
+            return false;
+        });
+
+        this.setState({ tasks });
+    };
 
     render = () => (
         <div>
             <UserInput onSubmit={this.onSubmit} />
-            <List data = {this.state.value} />
+            <List data={this.state.tasks} toggleCheck={this.toggleCheck} removeItem={this.removeItem} />
         </div>
     );
 }
