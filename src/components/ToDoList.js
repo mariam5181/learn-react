@@ -2,6 +2,14 @@ import React from 'react';
 import UserInput from './UserInput';
 import List from './List';
 
+import { connect } from 'react-redux';
+
+connect((store) => {
+    return {
+        tasks: store.tasks
+    };
+})
+
 class ToDoList extends React.Component {
     constructor(props) {
         super(props);
@@ -49,12 +57,13 @@ class ToDoList extends React.Component {
         this.setState({ tasks });
     };
 
-    render = () => (
-        <div>
+    render() {
+        console.log(this.props);
+        return (<div>
             <UserInput onSubmit={this.onSubmit} />
             <List data={this.state.tasks} toggleCheck={this.toggleCheck} removeItem={this.removeItem} />
-        </div>
-    );
+        </div>);
+    };
 }
 
 /*const ToDoList = props => {

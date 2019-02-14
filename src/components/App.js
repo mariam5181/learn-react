@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+// import logo from '../logo.svg';
+import '../App.css';
 
-import Square from './Square';
+// import Square from './Square';
 
 //import data from "./data.json";
 import ToDoList from './ToDoList'
