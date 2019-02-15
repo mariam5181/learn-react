@@ -4,12 +4,6 @@ import List from './List';
 
 import { connect } from 'react-redux';
 
-connect((store) => {
-    return {
-        tasks: store.tasks
-    };
-})
-
 class ToDoList extends React.Component {
     constructor(props) {
         super(props);
@@ -58,7 +52,7 @@ class ToDoList extends React.Component {
     };
 
     render() {
-        console.log(this.props);
+        //console.log(this.props);
         return (<div>
             <UserInput onSubmit={this.onSubmit} />
             <List data={this.state.tasks} toggleCheck={this.toggleCheck} removeItem={this.removeItem} />
@@ -73,4 +67,8 @@ class ToDoList extends React.Component {
     //return (<ul>{data.map(item => <ListItem item = {item} key={item.id.toString()} />)}</ul>);
 };*/
 
-export default ToDoList;
+export default connect((store) => {
+    return {
+        tasks: store.toDoList.tasks
+    }
+})(ToDoList);

@@ -10,10 +10,10 @@ export default function(state=initialState, action) {
 
 	            return {
 					...state,
-					value: ''
+					value: action.payload.value,
 				};
 
-	            // this.props.onSubmit(this.state.value);
+	            // need to empty input
 	        }
 	        break;
 		}
