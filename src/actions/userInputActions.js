@@ -7,9 +7,9 @@ export function addListItem(input_value) {
 	}
 }
 
-export function handleKeyPress(input_value) {
+export function handleKeyPress(inputValue) {
 	return {
 		type: HENDLE_KEY_PRESS,
-		payload: input_value,
+		payload: inputValue,
 	}
 }
