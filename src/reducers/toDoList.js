@@ -31,15 +31,8 @@ const toggleCheck = (state, action) => {
 };
 
 const removeListItem = (state, action) => {
-	const tasks = state.tasks.filter(currentItem => {
-        if(currentItem.id !== action.payload.id) {
-            return true;
-        }
-
-        return false;
-    });
-
-    return {...state, tasks};
+	const tasks = state.tasks.filter(currentItem => currentItem.id !== action.payload.id);
+  return { ...state, tasks };
 }
 
 export default function (state=initialState, action) {

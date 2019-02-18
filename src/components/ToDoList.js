@@ -7,13 +7,6 @@ import { connect } from 'react-redux';
 import { addListItem, toggleCheck, removeListItem } from '../actions/toDoListActions';
 
 class ToDoList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            tasks: []
-        };
-    }
-
     onSubmit = inputValue => {
         this.props.dispatch(addListItem(inputValue));
     };
@@ -30,7 +23,7 @@ class ToDoList extends React.Component {
         return (<div>
             <UserInput onSubmit={this.onSubmit} />
             {/*<List data={this.state.tasks} toggleCheck={this.toggleCheck} removeItem={this.removeItem} />*/}
-            <List toggleCheck={this.toggleCheck} removeItem={this.removeItem} />
+            <List toggleCheck={this.toggleCheck} removeItem={this.removeItem} tasks={this.props.tasks}/>
         </div>);
     };
 }
