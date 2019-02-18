@@ -27,9 +27,9 @@ class SquareItem extends React.Component {
     	});
 	}
 
-	render = () => (
-		<div style={this.addStyle()} onClick={this.changeColor}></div>
-	)
+	render () {
+		return (<div style={this.addStyle()} onClick={this.changeColor}></div>);
+	}
 }
 
 export default SquareItem;

@@ -4,42 +4,49 @@ const initialState = {
   	tasks: []
 };
 
+const addListItem = (state, action) => ({
+	...state,
+	tasks: [
+        ...state.tasks,
+        {
+            id: Date.now(),
+            title: action.payload,
+            done: false,
+        }
+    ]
+});
+
+const toggleCheck = (state, action) => {
+	const tasks = state.tasks.map( (i) => {
+        if(i.id === action.payload.id) {
+            return {
+                ...i,
+                done: !action.payload.done,
+            };
+        }
+        return i;
+    });
+
+    return {...state, tasks};
+};
+
+const removeListItem = (state, action) => {
+	const tasks = state.tasks.filter(currentItem => {
+        if(currentItem.id !== action.payload.id) {
+            return true;
+        }
+
+        return false;
+    });
+
+    return {...state, tasks};
+}
+
 export default function (state=initialState, action) {
 	switch (action.type) {
-		case ADD_LIST_ITEM: {
-			return {
-				...state,
-				tasks: [
-	                ...state.tasks,
-	                {
-	                    id: Date.now(),
-	                    title: action.payload, /* input value must be here */
-	                    done: false,
-	                }
-	            ]
-			};
-		}
-		case TOGGLE_CHECK: {
-			return state.tasks.map( (i) => {
-	            if(i.id === action.payload.id) { /* array must be here with id and done keys */
-	                return {
-	                    ...i,
-	                    done: !action.payload.done,
-	                };
-	            }
-	            return i;
-	        });
-		}
-		case REMOVE_LIST_ITEM: {
-			return state.tasks.filter(currentItem => {
-	            if(currentItem.id !== action.payload.id) { /* array must be here with id and done keys */
-	                return true;
-	            }
-
-	            return false;
-	        });
-		}
-		default:
-			return state;
+		case ADD_LIST_ITEM: return addListItem(state, action);
+		case TOGGLE_CHECK: return toggleCheck(state, action);
+		case REMOVE_LIST_ITEM: return removeListItem(state, action);
+		default: return state;
 	}
 }

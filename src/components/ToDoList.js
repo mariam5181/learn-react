@@ -4,6 +4,8 @@ import List from './List';
 
 import { connect } from 'react-redux';
 
+import { addListItem, toggleCheck, removeListItem } from '../actions/toDoListActions';
+
 class ToDoList extends React.Component {
     constructor(props) {
         super(props);
@@ -13,49 +15,22 @@ class ToDoList extends React.Component {
     }
 
     onSubmit = inputValue => {
-        this.setState({
-            tasks: [
-                ...this.state.tasks,
-                {
-                    id: Date.now(),
-                    title: inputValue,
-                    done: false,
-                }
-            ]
-        });
+        this.props.dispatch(addListItem(inputValue));
     };
 
     toggleCheck = (item) => {
-        const tasks = this.state.tasks.map( (i) => {
-            if(i.id === item.id) {
-                return {
-                    ...i,
-                    done: !item.done,
-                };
-            }
-            return i;
-        });
-
-        this.setState({ tasks });
+        this.props.dispatch(toggleCheck(item));
     };
 
     removeItem = item => {
-        const tasks = this.state.tasks.filter(currentItem => {
-            if(currentItem.id !== item.id) {
-                return true;
-            }
-
-            return false;
-        });
-
-        this.setState({ tasks });
+        this.props.dispatch(removeListItem(item));
     };
 
     render() {
-        //console.log(this.props);
         return (<div>
             <UserInput onSubmit={this.onSubmit} />
-            <List data={this.state.tasks} toggleCheck={this.toggleCheck} removeItem={this.removeItem} />
+            {/*<List data={this.state.tasks} toggleCheck={this.toggleCheck} removeItem={this.removeItem} />*/}
+            <List toggleCheck={this.toggleCheck} removeItem={this.removeItem} />
         </div>);
     };
 }

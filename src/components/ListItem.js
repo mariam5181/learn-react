@@ -2,9 +2,6 @@ import React from 'react';
 import Done from './Done';
 import Remove from './Remove';
 
-// import { connect } from 'react-redux';
-// import { addListItem } from '../actions/actions';
-
 const ListItem = props =>  {
 	const item = props.item;
 
@@ -22,10 +19,5 @@ const ListItem = props =>  {
 		<Remove onClick={onTrash} />
 	</li>)
 };
-
-// export default connect(
-//   null,
-//   { addListItem }
-// )(ListItem)
 
 export default ListItem;
